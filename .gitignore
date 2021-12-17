@@ -1,0 +1,6 @@
+.vscode/
+
+build/
+debug/
+release/
+gen/

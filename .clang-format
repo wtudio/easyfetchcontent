@@ -1,0 +1,13 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+ColumnLimit: 0
+
+SortIncludes: true
+IncludeBlocks: Preserve
+
+IndentPPDirectives: BeforeHash
+---
+Language: Proto
+BasedOnStyle: Google
+...
