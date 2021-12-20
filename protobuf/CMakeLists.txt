@@ -9,13 +9,23 @@ message(STATUS "start cmake ${PRJ_NAME} ...")
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 include(GetProtoBuf)
 
-# add gencode target
-add_protobuf_gencode_target(
+# add gencode target for path
+add_protobuf_gencode_for_path_target(
   TARGET_NAME testgencode
   PROTO_PATH ${CMAKE_CURRENT_SOURCE_DIR}/protos
   GENCODE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/gen
 )
 add_library(testgencode::testgencode ALIAS testgencode)
+
+#[[
+# add gencode target for one file
+add_protobuf_gencode_for_one_file_target(
+  TARGET_NAME testgencode
+  PROTO_FILE ${CMAKE_CURRENT_SOURCE_DIR}/protos/test.proto
+  GENCODE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/gen
+)
+add_library(testgencode::testgencode ALIAS testgencode)
+]]
 
 # define head files and src files
 File(GLOB hdrs ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
