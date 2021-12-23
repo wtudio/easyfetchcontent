@@ -10,7 +10,9 @@ FetchContent_Declare(
 FetchContent_GetProperties(libtomcrypt)
 if(NOT libtomcrypt_POPULATED)
   FetchContent_Populate(libtomcrypt)
+endif()
 
+if(NOT TARGET libtomcrypt)
   File(GLOB_RECURSE libtomcrypt_src ${libtomcrypt_SOURCE_DIR}/src/*.c)
 
   add_library(libtomcrypt)

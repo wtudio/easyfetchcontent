@@ -11,7 +11,9 @@ FetchContent_Declare(
 FetchContent_GetProperties(sqlite)
 if(NOT sqlite_POPULATED)
   FetchContent_Populate(sqlite)
+endif()
 
+if(NOT TARGET sqlite)
   # sqlite exe
   add_executable(sqlite)
   add_executable(sqlite::sqlite ALIAS sqlite)
@@ -21,7 +23,9 @@ if(NOT sqlite_POPULATED)
   if(UNIX)
     target_link_libraries(sqlite PRIVATE pthread dl)
   endif()
+endif()
 
+if(NOT TARGET libsqlite)
   # sqlite lib
   add_library(libsqlite)
   add_library(sqlite::libsqlite ALIAS libsqlite)

@@ -10,8 +10,10 @@ FetchContent_Declare(
 FetchContent_GetProperties(lua)
 if(NOT lua_POPULATED)
   FetchContent_Populate(lua)
+endif()
 
-  # lua exe
+# lua exe
+if(NOT TARGET lua)
   add_executable(lua)
   add_executable(lua::lua ALIAS lua)
 
@@ -23,8 +25,10 @@ if(NOT lua_POPULATED)
   if(UNIX)
     target_link_libraries(lua PRIVATE m)
   endif()
+endif()
 
-  # lua lib
+# lua lib
+if(NOT TARGET liblua)
   add_library(liblua)
   add_library(lua::liblua ALIAS liblua)
 
