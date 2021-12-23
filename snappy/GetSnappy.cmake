@@ -13,7 +13,9 @@ set(SNAPPY_INSTALL OFF CACHE BOOL "")
 
 FetchContent_MakeAvailable(snappy)
 
-add_library(snappy::snappy ALIAS snappy)
+if(NOT TARGET snappy::snappy)
+  add_library(snappy::snappy ALIAS snappy)
+endif ()
 
 # import targets：
 # snappy::snappy

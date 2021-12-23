@@ -10,12 +10,13 @@ FetchContent_Declare(
 FetchContent_GetProperties(rapidjson)
 if(NOT rapidjson_POPULATED)
   FetchContent_Populate(rapidjson)
+  
+  add_library(rapidjson INTERFACE)
+  add_library(rapidjson::rapidjson ALIAS rapidjson)
+
+  target_include_directories(rapidjson INTERFACE ${rapidjson_SOURCE_DIR}/include)
+
 endif()
-
-add_library(rapidjson INTERFACE)
-add_library(rapidjson::rapidjson ALIAS rapidjson)
-
-target_include_directories(rapidjson INTERFACE ${rapidjson_SOURCE_DIR}/include)
 
 # import targets：
 # rapidjson::rapidjson

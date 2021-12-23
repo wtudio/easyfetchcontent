@@ -10,32 +10,33 @@ FetchContent_Declare(
 FetchContent_GetProperties(lua)
 if(NOT lua_POPULATED)
   FetchContent_Populate(lua)
-endif()
 
-# lua exe
-add_executable(lua)
-add_executable(lua::lua ALIAS lua)
+  # lua exe
+  add_executable(lua)
+  add_executable(lua::lua ALIAS lua)
 
-File(GLOB lua_src ${lua_SOURCE_DIR}/*.c)
-LIST(REMOVE_ITEM lua_src ${lua_SOURCE_DIR}/onelua.c)
+  File(GLOB lua_src ${lua_SOURCE_DIR}/*.c)
+  LIST(REMOVE_ITEM lua_src ${lua_SOURCE_DIR}/onelua.c)
 
-target_sources(lua PRIVATE ${lua_src})
-target_include_directories(lua PRIVATE ${lua_SOURCE_DIR})
-if(UNIX)
-  target_link_libraries(lua PRIVATE m)
-endif()
+  target_sources(lua PRIVATE ${lua_src})
+  target_include_directories(lua PRIVATE ${lua_SOURCE_DIR})
+  if(UNIX)
+    target_link_libraries(lua PRIVATE m)
+  endif()
 
-# lua lib
-add_library(liblua)
-add_library(lua::liblua ALIAS liblua)
+  # lua lib
+  add_library(liblua)
+  add_library(lua::liblua ALIAS liblua)
 
-File(GLOB lib_lua_src ${lua_SOURCE_DIR}/*.c)
-LIST(REMOVE_ITEM lib_lua_src ${lua_SOURCE_DIR}/lua.c ${lua_SOURCE_DIR}/onelua.c)
+  File(GLOB lib_lua_src ${lua_SOURCE_DIR}/*.c)
+  LIST(REMOVE_ITEM lib_lua_src ${lua_SOURCE_DIR}/lua.c ${lua_SOURCE_DIR}/onelua.c)
 
-target_sources(liblua PRIVATE ${lib_lua_src})
-target_include_directories(liblua PUBLIC ${lua_SOURCE_DIR})
-if(UNIX)
-  target_link_libraries(liblua PRIVATE m)
+  target_sources(liblua PRIVATE ${lib_lua_src})
+  target_include_directories(liblua PUBLIC ${lua_SOURCE_DIR})
+  if(UNIX)
+    target_link_libraries(liblua PRIVATE m)
+  endif()
+
 endif()
 
 # import targets：

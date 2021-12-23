@@ -22,10 +22,12 @@ endif()
 
 FetchContent_MakeAvailable(jsoncpp)
 
-if (TARGET jsoncpp_static)
-  add_library(jsoncpp::jsoncpp ALIAS jsoncpp_static)
-elseif (TARGET jsoncpp_lib)
-  add_library(jsoncpp::jsoncpp ALIAS jsoncpp_lib)
+if(NOT TARGET jsoncpp::jsoncpp)
+  if (TARGET jsoncpp_static)
+    add_library(jsoncpp::jsoncpp ALIAS jsoncpp_static)
+  elseif (TARGET jsoncpp_lib)
+    add_library(jsoncpp::jsoncpp ALIAS jsoncpp_lib)
+  endif ()
 endif ()
 
 # import targets：

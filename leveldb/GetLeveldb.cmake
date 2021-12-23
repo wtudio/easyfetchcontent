@@ -13,7 +13,9 @@ set(LEVELDB_INSTALL OFF CACHE BOOL "")
 
 FetchContent_MakeAvailable(leveldb)
 
-add_library(leveldb::leveldb ALIAS leveldb)
+if(NOT TARGET leveldb::leveldb)
+  add_library(leveldb::leveldb ALIAS leveldb)
+endif()
 
 # import targets：
 # leveldb::leveldb

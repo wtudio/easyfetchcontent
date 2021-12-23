@@ -11,26 +11,27 @@ FetchContent_Declare(
 FetchContent_GetProperties(sqlite)
 if(NOT sqlite_POPULATED)
   FetchContent_Populate(sqlite)
-endif()
 
-# sqlite exe
-add_executable(sqlite)
-add_executable(sqlite::sqlite ALIAS sqlite)
+  # sqlite exe
+  add_executable(sqlite)
+  add_executable(sqlite::sqlite ALIAS sqlite)
 
-target_sources(sqlite PRIVATE ${sqlite_SOURCE_DIR}/sqlite3.c ${sqlite_SOURCE_DIR}/shell.c)
-target_include_directories(sqlite PRIVATE ${sqlite_SOURCE_DIR})
-if(UNIX)
-  target_link_libraries(sqlite PRIVATE pthread dl)
-endif()
+  target_sources(sqlite PRIVATE ${sqlite_SOURCE_DIR}/sqlite3.c ${sqlite_SOURCE_DIR}/shell.c)
+  target_include_directories(sqlite PRIVATE ${sqlite_SOURCE_DIR})
+  if(UNIX)
+    target_link_libraries(sqlite PRIVATE pthread dl)
+  endif()
 
-# sqlite lib
-add_library(libsqlite)
-add_library(sqlite::libsqlite ALIAS libsqlite)
+  # sqlite lib
+  add_library(libsqlite)
+  add_library(sqlite::libsqlite ALIAS libsqlite)
 
-target_sources(libsqlite PRIVATE ${sqlite_SOURCE_DIR}/sqlite3.c)
-target_include_directories(libsqlite PUBLIC ${sqlite_SOURCE_DIR})
-if(UNIX)
-  target_link_libraries(libsqlite PUBLIC pthread dl)
+  target_sources(libsqlite PRIVATE ${sqlite_SOURCE_DIR}/sqlite3.c)
+  target_include_directories(libsqlite PUBLIC ${sqlite_SOURCE_DIR})
+  if(UNIX)
+    target_link_libraries(libsqlite PUBLIC pthread dl)
+  endif()
+
 endif()
 
 # import targets：
