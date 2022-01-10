@@ -15,6 +15,7 @@ add_subdirectory(sqlite)
 add_subdirectory(yamlcpp)
 add_subdirectory(tinyxml2)
 add_subdirectory(libtomcrypt)
+add_subdirectory(asio)
 
 add_subdirectory(gtest)
 add_subdirectory(googlebenchmark)
