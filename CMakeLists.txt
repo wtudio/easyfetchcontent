@@ -18,6 +18,7 @@ add_subdirectory(libtomcrypt)
 add_subdirectory(asio)
 add_subdirectory(robinhood)
 add_subdirectory(libevent)
+add_subdirectory(spdlog)
 
 add_subdirectory(gtest)
 add_subdirectory(googlebenchmark)
