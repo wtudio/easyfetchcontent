@@ -20,14 +20,14 @@ endif()
 FetchContent_MakeAvailable(freeglut)
 
 if(NOT TARGET freeglut::freeglut)
-  if (TARGET freeglut_static)
+  if(TARGET freeglut_static)
     add_library(freeglut::freeglut ALIAS freeglut_static)
     target_include_directories(freeglut_static INTERFACE $<BUILD_INTERFACE:${freeglut_SOURCE_DIR}/include/GL>)
-  elseif (TARGET freeglut)
+  elseif(TARGET freeglut)
     add_library(freeglut::freeglut ALIAS freeglut)
     target_include_directories(freeglut INTERFACE $<BUILD_INTERFACE:${freeglut_SOURCE_DIR}/include/GL>)
-  endif ()
-endif ()
+  endif()
+endif()
 
 # import targets：
 # freeglut::freeglut
