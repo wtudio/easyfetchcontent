@@ -7,11 +7,14 @@ FetchContent_Declare(
   URL  https://github.com/redis/hiredis/archive/v1.0.2.tar.gz
 )
 
-set(DISABLE_TESTS ON CACHE BOOL "")
+FetchContent_GetProperties(hiredis)
+if(NOT hiredis_POPULATED)
+  FetchContent_Populate(hiredis)
 
-FetchContent_MakeAvailable(hiredis)
+  set(DISABLE_TESTS ON CACHE BOOL "")
 
-if(NOT TARGET hiredis::hiredis)
+  add_subdirectory(${hiredis_SOURCE_DIR} ${hiredis_BINARY_DIR})
+
   add_library(hiredis::hiredis ALIAS hiredis)
 endif()
 

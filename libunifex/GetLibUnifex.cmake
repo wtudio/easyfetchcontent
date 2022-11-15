@@ -7,9 +7,12 @@ FetchContent_Declare(
   URL  https://github.com/facebookexperimental/libunifex/archive/c359fd8e7d97d91359cf4a6c1dbef99b0b1767b6.tar.gz
 )
 
-FetchContent_MakeAvailable(libunifex)
+FetchContent_GetProperties(libunifex)
+if(NOT libunifex_POPULATED)
+  FetchContent_Populate(libunifex)
 
-if(NOT TARGET libunifex::unifex)
+  add_subdirectory(${libunifex_SOURCE_DIR} ${libunifex_BINARY_DIR})
+
   add_library(libunifex::unifex ALIAS unifex)
 endif()
 

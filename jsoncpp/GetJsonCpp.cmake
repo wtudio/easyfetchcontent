@@ -7,22 +7,25 @@ FetchContent_Declare(
   URL  https://github.com/open-source-parsers/jsoncpp/archive/1.9.5.tar.gz
 )
 
-set(JSONCPP_WITH_TESTS OFF CACHE BOOL "")
-set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF CACHE BOOL "")
+FetchContent_GetProperties(jsoncpp)
+if(NOT jsoncpp_POPULATED)
+  FetchContent_Populate(jsoncpp)
 
-set(BUILD_OBJECT_LIBS OFF CACHE BOOL "")
+  set(JSONCPP_WITH_TESTS OFF CACHE BOOL "")
+  set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF CACHE BOOL "")
 
-if(BUILD_SHARED_LIBS)
-  set(BUILD_SHARED_LIBS ON CACHE BOOL "")
-  set(BUILD_STATIC_LIBS OFF CACHE BOOL "")
-else()
-  set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
-  set(BUILD_STATIC_LIBS ON CACHE BOOL "")
-endif()
+  set(BUILD_OBJECT_LIBS OFF CACHE BOOL "")
 
-FetchContent_MakeAvailable(jsoncpp)
+  if(BUILD_SHARED_LIBS)
+    set(BUILD_SHARED_LIBS ON CACHE BOOL "")
+    set(BUILD_STATIC_LIBS OFF CACHE BOOL "")
+  else()
+    set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
+    set(BUILD_STATIC_LIBS ON CACHE BOOL "")
+  endif()
 
-if(NOT TARGET jsoncpp::jsoncpp)
+  add_subdirectory(${jsoncpp_SOURCE_DIR} ${jsoncpp_BINARY_DIR})
+
   if(TARGET jsoncpp_static)
     add_library(jsoncpp::jsoncpp ALIAS jsoncpp_static)
   elseif(TARGET jsoncpp_lib)

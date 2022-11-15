@@ -7,9 +7,14 @@ FetchContent_Declare(
   URL https://github.com/gflags/gflags/archive/v2.2.2.tar.gz
 )
 
-set(BUILD_TESTING OFF CACHE BOOL "")
+FetchContent_GetProperties(gflags)
+if(NOT gflags_POPULATED)
+  FetchContent_Populate(gflags)
 
-FetchContent_MakeAvailable(gflags)
+  set(BUILD_TESTING OFF CACHE BOOL "")
+
+  add_subdirectory(${gflags_SOURCE_DIR} ${gflags_BINARY_DIR})
+endif()
 
 # import targets：
 # gflags::gflags

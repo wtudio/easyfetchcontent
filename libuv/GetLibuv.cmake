@@ -7,13 +7,16 @@ FetchContent_Declare(
   URL  https://github.com/libuv/libuv/archive/v1.44.1.tar.gz
 )
 
-set(BUILD_TESTING OFF CACHE BOOL "")
-set(LIBUV_BUILD_TESTS OFF CACHE BOOL "")
-set(LIBUV_BUILD_BENCH OFF CACHE BOOL "")
+FetchContent_GetProperties(libuv)
+if(NOT libuv_POPULATED)
+  FetchContent_Populate(libuv)
 
-FetchContent_MakeAvailable(libuv)
+  set(BUILD_TESTING OFF CACHE BOOL "")
+  set(LIBUV_BUILD_TESTS OFF CACHE BOOL "")
+  set(LIBUV_BUILD_BENCH OFF CACHE BOOL "")
 
-if(NOT TARGET libuv::libuv)
+  add_subdirectory(${libuv_SOURCE_DIR} ${libuv_BINARY_DIR})
+
   if(BUILD_SHARED_LIBS)
     if(TARGET uv)
       add_library(libuv::libuv ALIAS uv)

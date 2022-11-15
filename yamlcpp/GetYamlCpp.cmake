@@ -7,12 +7,17 @@ FetchContent_Declare(
   URL  https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.7.0.tar.gz
 )
 
-set(BUILD_TESTING OFF CACHE BOOL "")
-set(YAML_CPP_BUILD_TESTS OFF CACHE BOOL "")
-set(YAML_CPP_BUILD_TOOLS OFF CACHE BOOL "")
-set(YAML_CPP_INSTALL OFF CACHE BOOL "")
+FetchContent_GetProperties(yaml-cpp)
+if(NOT yaml-cpp_POPULATED)
+  FetchContent_Populate(yaml-cpp)
 
-FetchContent_MakeAvailable(yaml-cpp)
+  set(BUILD_TESTING OFF CACHE BOOL "")
+  set(YAML_CPP_BUILD_TESTS OFF CACHE BOOL "")
+  set(YAML_CPP_BUILD_TOOLS OFF CACHE BOOL "")
+  set(YAML_CPP_INSTALL OFF CACHE BOOL "")
+
+  add_subdirectory(${yaml-cpp_SOURCE_DIR} ${yaml-cpp_BINARY_DIR})
+endif()
 
 # import targets：
 # yaml-cpp::yaml-cpp

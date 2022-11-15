@@ -7,11 +7,16 @@ FetchContent_Declare(
   URL https://github.com/google/benchmark/archive/v1.6.0.tar.gz
 )
 
-set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "")
-set(BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "")
-set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "")
+FetchContent_GetProperties(googlebenchmark)
+if(NOT googlebenchmark_POPULATED)
+  FetchContent_Populate(googlebenchmark)
 
-FetchContent_MakeAvailable(googlebenchmark)
+  set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "")
+  set(BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "")
+  set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "")
+
+  add_subdirectory(${googlebenchmark_SOURCE_DIR} ${googlebenchmark_BINARY_DIR})
+endif()
 
 # import targets：
 # benchmark::benchmark

@@ -7,13 +7,16 @@ FetchContent_Declare(
   URL  https://github.com/google/leveldb/archive/1.23.tar.gz
 )
 
-set(LEVELDB_BUILD_TESTS OFF CACHE BOOL "")
-set(LEVELDB_BUILD_BENCHMARKS OFF CACHE BOOL "")
-set(LEVELDB_INSTALL OFF CACHE BOOL "")
+FetchContent_GetProperties(leveldb)
+if(NOT leveldb_POPULATED)
+  FetchContent_Populate(leveldb)
 
-FetchContent_MakeAvailable(leveldb)
+  set(LEVELDB_BUILD_TESTS OFF CACHE BOOL "")
+  set(LEVELDB_BUILD_BENCHMARKS OFF CACHE BOOL "")
+  set(LEVELDB_INSTALL OFF CACHE BOOL "")
 
-if(NOT TARGET leveldb::leveldb)
+  add_subdirectory(${leveldb_SOURCE_DIR} ${leveldb_BINARY_DIR})
+
   add_library(leveldb::leveldb ALIAS leveldb)
 endif()
 

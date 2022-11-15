@@ -10,9 +10,7 @@ FetchContent_Declare(
 FetchContent_GetProperties(asio)
 if(NOT asio_POPULATED)
   FetchContent_Populate(asio)
-endif()
 
-if(NOT TARGET asio)
   add_library(asio INTERFACE)
   add_library(asio::asio ALIAS asio)
 
@@ -51,7 +49,6 @@ if(NOT TARGET asio)
 
     target_compile_definitions(asio INTERFACE _WIN32_WINNT=${_WIN32_WINNT} WIN32_LEAN_AND_MEAN)
   endif()
-
 endif()
 
 # import targets：

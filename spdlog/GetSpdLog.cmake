@@ -7,9 +7,14 @@ FetchContent_Declare(
   URL  https://github.com/gabime/spdlog/archive/v1.9.2.tar.gz
 )
 
-set(SPDLOG_FMT_EXTERNAL ON CACHE BOOL "")
+FetchContent_GetProperties(spdlog)
+if(NOT spdlog_POPULATED)
+  FetchContent_Populate(spdlog)
 
-FetchContent_MakeAvailable(spdlog)
+  set(SPDLOG_FMT_EXTERNAL ON CACHE BOOL "")
+
+  add_subdirectory(${spdlog_SOURCE_DIR} ${spdlog_BINARY_DIR})
+endif()
 
 # import targets：
 # spdlog::spdlog
