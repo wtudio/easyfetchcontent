@@ -4,7 +4,7 @@ message(STATUS "get googletest ...")
 
 FetchContent_Declare(
   googletest
-  URL  https://github.com/google/googletest/archive/release-1.11.0.tar.gz
+  URL  https://github.com/google/googletest/archive/release-1.12.1.tar.gz
 )
 
 FetchContent_GetProperties(googletest)
