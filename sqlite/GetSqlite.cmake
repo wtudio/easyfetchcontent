@@ -2,10 +2,11 @@ include(FetchContent)
 
 message(STATUS "get sqlite ...")
 
-# sqlite版本记录：https://www.sqlite.org/chronology.html
+# sqlite版本记录:https://www.sqlite.org/chronology.html
 FetchContent_Declare(
   sqlite
   URL  https://sqlite.org/2021/sqlite-amalgamation-3370000.zip
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(sqlite)
@@ -33,6 +34,6 @@ if(NOT sqlite_POPULATED)
   endif()
 endif()
 
-# import targets：
+# import targets:
 # sqlite::sqlite
 # sqlite::libsqlite

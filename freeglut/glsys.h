@@ -7,7 +7,7 @@
 封装为头文件，只需要设置一个display函数即可，其余都设置一套默认参数
 使用一个全局单例类保存基本参数，设置好默认参数，一些静态函数注册opengl回调使用这个全局单例里保存的参数
 如果要修改参数可以先在main函数里修改这个全局单例
-使用时：
+使用时:
 glSysSetDisplay(Display);
 glSysInit(argc, argv);
 glSysStart();

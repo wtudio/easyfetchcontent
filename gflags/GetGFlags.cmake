@@ -5,16 +5,15 @@ message(STATUS "get gflags ...")
 FetchContent_Declare(
   gflags
   URL https://github.com/gflags/gflags/archive/v2.2.2.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(gflags)
 if(NOT gflags_POPULATED)
-  FetchContent_Populate(gflags)
-
   set(BUILD_TESTING OFF CACHE BOOL "")
 
-  add_subdirectory(${gflags_SOURCE_DIR} ${gflags_BINARY_DIR})
+  FetchContent_MakeAvailable(gflags)
 endif()
 
-# import targets：
+# import targets:
 # gflags::gflags

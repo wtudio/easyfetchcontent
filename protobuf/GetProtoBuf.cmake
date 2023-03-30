@@ -5,19 +5,19 @@ message(STATUS "get protobuf ...")
 FetchContent_Declare(
   protobuf
   URL   https://github.com/protocolbuffers/protobuf/archive/v3.18.1.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+  SOURCE_SUBDIR  cmake
 )
 
 FetchContent_GetProperties(protobuf)
 if(NOT protobuf_POPULATED)
-  FetchContent_Populate(protobuf)
-
   set(protobuf_BUILD_TESTS OFF CACHE BOOL "")
   set(protobuf_WITH_ZLIB OFF CACHE BOOL "")
 
-  add_subdirectory(${protobuf_SOURCE_DIR}/cmake ${protobuf_BINARY_DIR})
+  FetchContent_MakeAvailable(protobuf)
 endif()
 
-# import targets：
+# import targets:
 # protobuf::libprotobuf
 # protobuf::libprotobuf-lite
 # protobuf::libprotoc

@@ -5,6 +5,7 @@ message(STATUS "get lua ...")
 FetchContent_Declare(
   lua
   URL  https://github.com/lua/lua/archive/v5.4.3.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(lua)
@@ -39,6 +40,6 @@ if(NOT lua_POPULATED)
 
 endif()
 
-# import targets：
+# import targets:
 # lua::lua
 # lua::liblua

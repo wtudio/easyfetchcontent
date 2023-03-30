@@ -5,17 +5,16 @@ message(STATUS "get libuv ...")
 FetchContent_Declare(
   libuv
   URL  https://github.com/libuv/libuv/archive/v1.44.1.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(libuv)
 if(NOT libuv_POPULATED)
-  FetchContent_Populate(libuv)
-
   set(BUILD_TESTING OFF CACHE BOOL "")
   set(LIBUV_BUILD_TESTS OFF CACHE BOOL "")
   set(LIBUV_BUILD_BENCH OFF CACHE BOOL "")
 
-  add_subdirectory(${libuv_SOURCE_DIR} ${libuv_BINARY_DIR})
+  FetchContent_MakeAvailable(libuv)
 
   if(BUILD_SHARED_LIBS)
     if(TARGET uv)
@@ -28,5 +27,5 @@ if(NOT libuv_POPULATED)
   endif()
 endif()
 
-# import targets：
+# import targets:
 # libuv::libuv

@@ -5,6 +5,7 @@ message(STATUS "get asio ...")
 FetchContent_Declare(
   asio
   URL  https://github.com/chriskohlhoff/asio/archive/asio-1-21-0.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(asio)
@@ -51,5 +52,5 @@ if(NOT asio_POPULATED)
   endif()
 endif()
 
-# import targets：
+# import targets:
 # asio::asio

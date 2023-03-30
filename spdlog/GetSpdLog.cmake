@@ -9,13 +9,11 @@ FetchContent_Declare(
 
 FetchContent_GetProperties(spdlog)
 if(NOT spdlog_POPULATED)
-  FetchContent_Populate(spdlog)
-
   set(SPDLOG_FMT_EXTERNAL ON CACHE BOOL "")
 
-  add_subdirectory(${spdlog_SOURCE_DIR} ${spdlog_BINARY_DIR})
+  FetchContent_MakeAvailable(spdlog)
 endif()
 
-# import targets：
+# import targets:
 # spdlog::spdlog
 # spdlog::spdlog_header_only

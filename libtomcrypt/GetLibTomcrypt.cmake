@@ -5,6 +5,7 @@ message(STATUS "get libtomcrypt ...")
 FetchContent_Declare(
   libtomcrypt
   URL  https://github.com/libtom/libtomcrypt/archive/v1.18.2.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(libtomcrypt)
@@ -21,5 +22,5 @@ if(NOT libtomcrypt_POPULATED)
   target_compile_definitions(libtomcrypt PRIVATE LTC_SOURCE LTC_NO_PROTOTYPES LTC_NO_TEST LTC_NO_FILE)
 endif()
 
-# import targets：
+# import targets:
 # libtomcrypt::libtomcrypt

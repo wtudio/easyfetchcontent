@@ -5,12 +5,11 @@ message(STATUS "get jsoncpp ...")
 FetchContent_Declare(
   jsoncpp
   URL  https://github.com/open-source-parsers/jsoncpp/archive/1.9.5.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(jsoncpp)
 if(NOT jsoncpp_POPULATED)
-  FetchContent_Populate(jsoncpp)
-
   set(JSONCPP_WITH_TESTS OFF CACHE BOOL "")
   set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF CACHE BOOL "")
 
@@ -24,7 +23,7 @@ if(NOT jsoncpp_POPULATED)
     set(BUILD_STATIC_LIBS ON CACHE BOOL "")
   endif()
 
-  add_subdirectory(${jsoncpp_SOURCE_DIR} ${jsoncpp_BINARY_DIR})
+  FetchContent_MakeAvailable(jsoncpp)
 
   if(TARGET jsoncpp_static)
     add_library(jsoncpp::jsoncpp ALIAS jsoncpp_static)
@@ -33,5 +32,5 @@ if(NOT jsoncpp_POPULATED)
   endif()
 endif()
 
-# import targets：
+# import targets:
 # jsoncpp::jsoncpp

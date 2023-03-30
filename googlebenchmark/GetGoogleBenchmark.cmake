@@ -5,20 +5,19 @@ message(STATUS "get googlebenchmark ...")
 FetchContent_Declare(
   googlebenchmark
   URL https://github.com/google/benchmark/archive/v1.6.0.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(googlebenchmark)
 if(NOT googlebenchmark_POPULATED)
-  FetchContent_Populate(googlebenchmark)
-
   set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "")
   set(BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "")
   set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "")
 
-  add_subdirectory(${googlebenchmark_SOURCE_DIR} ${googlebenchmark_BINARY_DIR})
+  FetchContent_MakeAvailable(googlebenchmark)
 endif()
 
-# import targets：
+# import targets:
 # benchmark::benchmark
 # benchmark::benchmark_main
 

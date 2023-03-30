@@ -5,12 +5,11 @@ message(STATUS "get freeglut ...")
 FetchContent_Declare(
   freeglut
   URL  https://github.com/FreeGLUTProject/freeglut/releases/download/v3.2.2/freeglut-3.2.2.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_GetProperties(freeglut)
 if(NOT freeglut_POPULATED)
-  FetchContent_Populate(freeglut)
-
   set(FREEGLUT_BUILD_DEMOS OFF CACHE BOOL "")
 
   if(BUILD_SHARED_LIBS)
@@ -21,7 +20,7 @@ if(NOT freeglut_POPULATED)
     set(FREEGLUT_BUILD_STATIC_LIBS ON CACHE BOOL "")
   endif()
 
-  add_subdirectory(${freeglut_SOURCE_DIR} ${freeglut_BINARY_DIR})
+  FetchContent_MakeAvailable(freeglut)
 
   if(TARGET freeglut_static)
     add_library(freeglut::freeglut ALIAS freeglut_static)
@@ -32,5 +31,5 @@ if(NOT freeglut_POPULATED)
   endif()
 endif()
 
-# import targets：
+# import targets:
 # freeglut::freeglut
