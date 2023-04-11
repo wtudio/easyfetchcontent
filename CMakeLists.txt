@@ -5,6 +5,7 @@ project(EasyFetchContentTestAll VERSION 0.1.0 LANGUAGES C CXX)
 message(STATUS "uncomment to enable test for target library")
 
 # add_subdirectory(asio)
+# add_subdirectory(boost)
 # add_subdirectory(fmt)
 # add_subdirectory(freeglut)
 # add_subdirectory(gflags)
