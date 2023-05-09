@@ -23,6 +23,8 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 - [libuv](libuv)
 - [lua](lua)
 - [nlohmann_json](nlohmann_json)
+- [paho_mqtt_c](paho_mqtt_c)
+- [paho_mqtt_cpp](paho_mqtt_cpp)
 - [protobuf](protobuf)
 - [range-v3](range-v3)
 - [rapidjson](rapidjson)
