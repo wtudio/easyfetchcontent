@@ -20,7 +20,7 @@ int32_t main(int32_t argc, char** argv) {
 
   test::testmsg msg2;
   msg2.ParseFromIstream(&ss);
-  printf("msg2.id() = %llu\n", msg2.id());
+  printf("msg2.id() = %lu\n", msg2.id());
   printf("msg2.name() = %s\n", msg2.name().c_str());
   printf("msg2.age() = %d\n", msg2.age());
 
