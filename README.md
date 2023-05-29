@@ -23,6 +23,7 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 - [libunifex](libunifex)
 - [libuv](libuv)
 - [lua](lua)
+- [mujoco](mujoco)
 - [nlohmann_json](nlohmann_json)
 - [paho_mqtt_c](paho_mqtt_c)
 - [paho_mqtt_cpp](paho_mqtt_cpp)
