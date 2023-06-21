@@ -6,6 +6,8 @@ message(STATUS "uncomment to enable test for target library")
 
 # add_subdirectory(asio)
 # add_subdirectory(boost)
+# add_subdirectory(cjson)
+# add_subdirectory(eigen3)
 # add_subdirectory(fmt)
 # add_subdirectory(freeglut)
 # add_subdirectory(gflags)

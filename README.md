@@ -8,6 +8,8 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 ## Supported Libraries
 - [asio](asio)
 - [boost](boost)
+- [cjson](cjson)
+- [eigen3](eigen3)
 - [fmt](fmt)
 - [freeglut](freeglut)
 - [gflags](gflags)
