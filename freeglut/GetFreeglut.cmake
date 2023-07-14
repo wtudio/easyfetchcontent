@@ -4,20 +4,29 @@ message(STATUS "get freeglut ...")
 
 FetchContent_Declare(
   freeglut
-  URL  https://github.com/FreeGLUTProject/freeglut/releases/download/v3.2.2/freeglut-3.2.2.tar.gz
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
+  URL https://github.com/FreeGLUTProject/freeglut/releases/download/v3.2.2/freeglut-3.2.2.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 
 FetchContent_GetProperties(freeglut)
 if(NOT freeglut_POPULATED)
-  set(FREEGLUT_BUILD_DEMOS OFF CACHE BOOL "")
+  set(FREEGLUT_BUILD_DEMOS
+      OFF
+      CACHE BOOL "")
 
   if(BUILD_SHARED_LIBS)
-    set(FREEGLUT_BUILD_SHARED_LIBS ON CACHE BOOL "")
-    set(FREEGLUT_BUILD_STATIC_LIBS OFF CACHE BOOL "")
+    set(FREEGLUT_BUILD_SHARED_LIBS
+        ON
+        CACHE BOOL "")
+    set(FREEGLUT_BUILD_STATIC_LIBS
+        OFF
+        CACHE BOOL "")
   else()
-    set(FREEGLUT_BUILD_SHARED_LIBS OFF CACHE BOOL "")
-    set(FREEGLUT_BUILD_STATIC_LIBS ON CACHE BOOL "")
+    set(FREEGLUT_BUILD_SHARED_LIBS
+        OFF
+        CACHE BOOL "")
+    set(FREEGLUT_BUILD_STATIC_LIBS
+        ON
+        CACHE BOOL "")
   endif()
 
   FetchContent_MakeAvailable(freeglut)

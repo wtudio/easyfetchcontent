@@ -5,14 +5,19 @@ message(STATUS "get googlebenchmark ...")
 FetchContent_Declare(
   googlebenchmark
   URL https://github.com/google/benchmark/archive/v1.6.0.tar.gz
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 
 FetchContent_GetProperties(googlebenchmark)
 if(NOT googlebenchmark_POPULATED)
-  set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "")
-  set(BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "")
-  set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "")
+  set(BENCHMARK_ENABLE_TESTING
+      OFF
+      CACHE BOOL "")
+  set(BENCHMARK_ENABLE_GTEST_TESTS
+      OFF
+      CACHE BOOL "")
+  set(BENCHMARK_ENABLE_INSTALL
+      OFF
+      CACHE BOOL "")
 
   FetchContent_MakeAvailable(googlebenchmark)
 endif()
@@ -27,8 +32,5 @@ function(add_benchmark_target)
   set(target_bench_name ${ARG_BENCH_TARGET}_benchmark)
 
   add_executable(${target_bench_name} ${ARG_BENCH_SRC})
-  target_link_libraries(${target_bench_name} PRIVATE ${ARG_BENCH_TARGET}
-    benchmark::benchmark benchmark::benchmark_main)
-
-  set_property(TARGET ${target_bench_name} PROPERTY UNITY_BUILD ON)
+  target_link_libraries(${target_bench_name} PRIVATE ${ARG_BENCH_TARGET} benchmark::benchmark benchmark::benchmark_main)
 endfunction()

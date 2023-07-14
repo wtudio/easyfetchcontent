@@ -4,9 +4,8 @@ message(STATUS "get paho_mqtt_cpp ...")
 
 FetchContent_Declare(
   paho_mqtt_cpp
-  URL  https://github.com/eclipse/paho.mqtt.cpp/archive/v1.2.0.tar.gz
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
+  URL https://github.com/eclipse/paho.mqtt.cpp/archive/v1.2.0.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 
 FetchContent_GetProperties(paho_mqtt_cpp)
 if(NOT paho_mqtt_cpp_POPULATED)

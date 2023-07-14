@@ -23,12 +23,12 @@ class glSys {
   }
 
   const double deg2rad = 0.017453;
-  int32_t mouseX, mouseY;            //用于记录鼠标位置
-  double cameraX, cameraY, cameraZ;  //用于摄像机定位
-  double r, alpha, fy;               //球坐标，距离、水平偏角、竖直偏角，单位均用角度
-  bool blButDown;                    //记录鼠标左键按下的状态
-  bool blPrintFPS;                   //是否打印帧率
-  void (*funDisplay)(void);          //display函数
+  int32_t mouseX, mouseY;            // 用于记录鼠标位置
+  double cameraX, cameraY, cameraZ;  // 用于摄像机定位
+  double r, alpha, fy;               // 球坐标，距离、水平偏角、竖直偏角，单位均用角度
+  bool blButDown;                    // 记录鼠标左键按下的状态
+  bool blPrintFPS;                   // 是否打印帧率
+  void (*funDisplay)(void);          // display函数
  private:
   glSys() : r(3.0), alpha(60.0), fy(45.0), mouseX(0), mouseY(0), blButDown(false), blPrintFPS(false) {}
 };
@@ -47,8 +47,8 @@ static void Reshape(int w, int h) {
 
 static void Keyboard(unsigned char key, int x, int y) {
   switch (key) {
-    case 27:  //按ESCAPE时退出窗口
-      //exit(0);
+    case 27:  // 按ESCAPE时退出窗口
+      // exit(0);
       glutLeaveMainLoop();
       break;
     default:
@@ -56,20 +56,20 @@ static void Keyboard(unsigned char key, int x, int y) {
   }
 }
 
-//将球坐标转化为直角坐标，并设定为摄像机的位置，x，y 是水平方向和竖直方向的改变量
+// 将球坐标转化为直角坐标，并设定为摄像机的位置，x，y 是水平方向和竖直方向的改变量
 static void SetCamera(GLfloat x, GLfloat y) {
-  GLfloat alpha, fy;  //和它的名字一样，不过是单位是弧度
+  GLfloat alpha, fy;  // 和它的名字一样，不过是单位是弧度
   glSys* p = glSys::getInstance();
   if ((p->fy + y) > 1.0f && (p->fy + y) < 179.0f) {
-    p->alpha += x;  //根据鼠标移动的方向设置新的球坐标
+    p->alpha += x;  // 根据鼠标移动的方向设置新的球坐标
     p->fy += y;
     if (p->alpha > 360.0f) p->alpha -= 360.0f;
-    if (p->alpha < 0.0f) p->alpha += 360.0f;  //将水平偏角锁定在0°到360°之间
+    if (p->alpha < 0.0f) p->alpha += 360.0f;  // 将水平偏角锁定在0°到360°之间
     alpha = (p->alpha) * (p->deg2rad);
-    fy = p->fy * (p->deg2rad);                 //角度转弧度
-    p->cameraX = p->r * sin(fy) * cos(alpha);  //极坐标转直角坐标
+    fy = p->fy * (p->deg2rad);                 // 角度转弧度
+    p->cameraX = p->r * sin(fy) * cos(alpha);  // 极坐标转直角坐标
     p->cameraZ = p->r * sin(fy) * sin(alpha);
-    p->cameraY = p->r * cos(fy);  //注意：竖直方向的是y轴
+    p->cameraY = p->r * cos(fy);  // 注意：竖直方向的是y轴
   }
 }
 
@@ -98,7 +98,7 @@ static void Display() {
   glSys* p = glSys::getInstance();
   if (p->blPrintFPS) {
     static int frame = 0, time, timebase = 0;
-    //计算帧率
+    // 计算帧率
     frame++;
     time = glutGet(GLUT_ELAPSED_TIME);
     if (time - timebase > 1000) {
@@ -125,13 +125,13 @@ static void Display() {
   glPolygonMode(GL_BACK, GL_LINE);   // 设置反面为线形模式
   glFrontFace(GL_CW);                // 设置逆时针方向为正面
   glEnable(GL_CULL_FACE);
-  glCullFace(GL_BACK);  //不渲染反面
+  glCullFace(GL_BACK);  // 不渲染反面
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glDepthMask(GL_FALSE);
 
   glPushMatrix();
 
-  //画坐标系
+  // 画坐标系
   glPointSize(10);
   glBegin(GL_POINTS);
   glColor4f(0.2f, 0.8f, 0.5f, 0.3f);
@@ -185,7 +185,7 @@ static void Display() {
   glRasterPos3i(0, 0, BASELEN);
   glutBitmapCharacter(GLUT_BITMAP_8_BY_13, 'Z');
 
-  //具体
+  // 具体
   p->funDisplay();
 
   glPopMatrix();
@@ -224,7 +224,7 @@ static void glSysStart() {
   glutMainLoop();
 }
 
-//颜色转换
+// 颜色转换
 static std::vector<float> rgb2hsb(const std::vector<int>& rgb) {
   assert(rgb.size() == 3 && rgb[0] >= 0 && rgb[0] <= 255 && rgb[1] >= 0 && rgb[1] <= 255 && rgb[2] >= 0 && rgb[2] <= 255);
   std::vector<float> re;

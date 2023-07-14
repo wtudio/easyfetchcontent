@@ -4,15 +4,14 @@ message(STATUS "get libtomcrypt ...")
 
 FetchContent_Declare(
   libtomcrypt
-  URL  https://github.com/libtom/libtomcrypt/archive/v1.18.2.tar.gz
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
+  URL https://github.com/libtom/libtomcrypt/archive/v1.18.2.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 
 FetchContent_GetProperties(libtomcrypt)
 if(NOT libtomcrypt_POPULATED)
   FetchContent_Populate(libtomcrypt)
 
-  File(GLOB_RECURSE libtomcrypt_src ${libtomcrypt_SOURCE_DIR}/src/*.c)
+  file(GLOB_RECURSE libtomcrypt_src ${libtomcrypt_SOURCE_DIR}/src/*.c)
 
   add_library(libtomcrypt)
   add_library(libtomcrypt::libtomcrypt ALIAS libtomcrypt)

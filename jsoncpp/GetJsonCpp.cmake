@@ -4,23 +4,36 @@ message(STATUS "get jsoncpp ...")
 
 FetchContent_Declare(
   jsoncpp
-  URL  https://github.com/open-source-parsers/jsoncpp/archive/1.9.5.tar.gz
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
+  URL https://github.com/open-source-parsers/jsoncpp/archive/1.9.5.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 
 FetchContent_GetProperties(jsoncpp)
 if(NOT jsoncpp_POPULATED)
-  set(JSONCPP_WITH_TESTS OFF CACHE BOOL "")
-  set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF CACHE BOOL "")
+  set(JSONCPP_WITH_TESTS
+      OFF
+      CACHE BOOL "")
+  set(JSONCPP_WITH_POST_BUILD_UNITTEST
+      OFF
+      CACHE BOOL "")
 
-  set(BUILD_OBJECT_LIBS OFF CACHE BOOL "")
+  set(BUILD_OBJECT_LIBS
+      OFF
+      CACHE BOOL "")
 
   if(BUILD_SHARED_LIBS)
-    set(BUILD_SHARED_LIBS ON CACHE BOOL "")
-    set(BUILD_STATIC_LIBS OFF CACHE BOOL "")
+    set(BUILD_SHARED_LIBS
+        ON
+        CACHE BOOL "")
+    set(BUILD_STATIC_LIBS
+        OFF
+        CACHE BOOL "")
   else()
-    set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
-    set(BUILD_STATIC_LIBS ON CACHE BOOL "")
+    set(BUILD_SHARED_LIBS
+        OFF
+        CACHE BOOL "")
+    set(BUILD_STATIC_LIBS
+        ON
+        CACHE BOOL "")
   endif()
 
   FetchContent_MakeAvailable(jsoncpp)

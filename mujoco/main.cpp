@@ -61,7 +61,6 @@ mjtNum* ctrlnoise = nullptr;
 
 using Seconds = std::chrono::duration<double>;
 
-
 //---------------------------------------- plugin handling -----------------------------------------
 
 // return the path to the directory containing the current executable
@@ -74,7 +73,7 @@ std::string getExecutableDir() {
     DWORD buf_size = 128;
     bool success = false;
     while (!success) {
-      realpath.reset(new(std::nothrow) char[buf_size]);
+      realpath.reset(new (std::nothrow) char[buf_size]);
       if (!realpath) {
         std::cerr << "cannot allocate memory to store executable path\n";
         return "";
@@ -85,7 +84,7 @@ std::string getExecutableDir() {
         success = true;
       } else if (written == buf_size) {
         // realpath is too small, grow and retry
-        buf_size *=2;
+        buf_size *= 2;
       } else {
         std::cerr << "failed to retrieve executable path: " << GetLastError() << "\n";
         return "";
@@ -95,7 +94,7 @@ std::string getExecutableDir() {
   }();
 #else
   constexpr char kPathSep = '/';
-#if defined(__APPLE__)
+  #if defined(__APPLE__)
   std::unique_ptr<char[]> buf(nullptr);
   {
     std::uint32_t buf_size = 0;
@@ -110,15 +109,15 @@ std::string getExecutableDir() {
     }
   }
   const char* path = buf.get();
-#else
+  #else
   const char* path = "/proc/self/exe";
-#endif
+  #endif
   std::string realpath = [&]() -> std::string {
     std::unique_ptr<char[]> realpath(nullptr);
     std::uint32_t buf_size = 128;
     bool success = false;
     while (!success) {
-      realpath.reset(new(std::nothrow) char[buf_size]);
+      realpath.reset(new (std::nothrow) char[buf_size]);
       if (!realpath) {
         std::cerr << "cannot allocate memory to store executable path\n";
         return "";
@@ -159,8 +158,6 @@ std::string getExecutableDir() {
   return "";
 }
 
-
-
 // scan for libraries in the plugin directory to load additional plugins
 void scanPluginLibraries() {
   // check and print plugins that are linked directly into the executable
@@ -179,7 +176,6 @@ void scanPluginLibraries() {
   const std::string sep = "/";
 #endif
 
-
   // try to open the ${EXECDIR}/plugin directory
   // ${EXECDIR} is the directory containing the simulate binary itself
   const std::string executable_dir = getExecutableDir();
@@ -197,9 +193,7 @@ void scanPluginLibraries() {
       });
 }
 
-
 //------------------------------------------- simulation -------------------------------------------
-
 
 mjModel* LoadModel(const char* file, mj::Simulate& sim) {
   // this copy is needed so that the mju::strlen call below compiles
@@ -214,9 +208,9 @@ mjModel* LoadModel(const char* file, mj::Simulate& sim) {
   // load and compile
   char loadError[kErrorLength] = "";
   mjModel* mnew = 0;
-  if (std::strlen(filename)>4 &&
+  if (std::strlen(filename) > 4 &&
       !std::strncmp(filename + std::strlen(filename) - 4, ".mjb",
-                    sizeof(filename) - std::strlen(filename)+4)) {
+                    sizeof(filename) - std::strlen(filename) + 4)) {
     mnew = mj_loadModel(filename, nullptr);
     if (!mnew) {
       std::strcpy(loadError, "could not load binary model");
@@ -226,8 +220,8 @@ mjModel* LoadModel(const char* file, mj::Simulate& sim) {
     // remove trailing newline character from loadError
     if (loadError[0]) {
       int error_length = std::strlen(loadError);
-      if (loadError[error_length-1] == '\n') {
-        loadError[error_length-1] = '\0';
+      if (loadError[error_length - 1] == '\n') {
+        loadError[error_length - 1] = '\0';
       }
     }
   }
@@ -275,7 +269,7 @@ void PhysicsLoop(mj::Simulate& sim) {
 
         // allocate ctrlnoise
         free(ctrlnoise);
-        ctrlnoise = (mjtNum*) malloc(sizeof(mjtNum)*m->nu);
+        ctrlnoise = (mjtNum*)malloc(sizeof(mjtNum) * m->nu);
         mju_zero(ctrlnoise, m->nu);
       }
     }
@@ -297,7 +291,7 @@ void PhysicsLoop(mj::Simulate& sim) {
 
         // allocate ctrlnoise
         free(ctrlnoise);
-        ctrlnoise = static_cast<mjtNum*>(malloc(sizeof(mjtNum)*m->nu));
+        ctrlnoise = static_cast<mjtNum*>(malloc(sizeof(mjtNum) * m->nu));
         mju_zero(ctrlnoise, m->nu);
       }
     }
@@ -329,9 +323,9 @@ void PhysicsLoop(mj::Simulate& sim) {
           if (sim.ctrl_noise_std) {
             // convert rate and scale to discrete time (Ornstein–Uhlenbeck)
             mjtNum rate = mju_exp(-m->opt.timestep / mju_max(sim.ctrl_noise_rate, mjMINVAL));
-            mjtNum scale = sim.ctrl_noise_std * mju_sqrt(1-rate*rate);
+            mjtNum scale = sim.ctrl_noise_std * mju_sqrt(1 - rate * rate);
 
-            for (int i=0; i<m->nu; i++) {
+            for (int i = 0; i < m->nu; i++) {
               // update noise
               ctrlnoise[i] = rate * ctrlnoise[i] + scale * mju_standardNormal(nullptr);
 
@@ -345,7 +339,7 @@ void PhysicsLoop(mj::Simulate& sim) {
 
           // misalignment condition: distance from target sim time is bigger than syncmisalign
           bool misaligned =
-              mju_abs(Seconds(elapsedCPU).count()/slowdown - elapsedSim) > syncMisalign;
+              mju_abs(Seconds(elapsedCPU).count() / slowdown - elapsedSim) > syncMisalign;
 
           // out-of-sync (for any reason): reset sync times, step
           if (elapsedSim < 0 || elapsedCPU.count() < 0 || syncCPU.time_since_epoch().count() == 0 ||
@@ -364,10 +358,10 @@ void PhysicsLoop(mj::Simulate& sim) {
             bool measured = false;
             mjtNum prevSim = d->time;
 
-            double refreshTime = simRefreshFraction/sim.refresh_rate;
+            double refreshTime = simRefreshFraction / sim.refresh_rate;
 
             // step while sim lags behind cpu and within refreshTime
-            while (Seconds((d->time - syncSim)*slowdown) < mj::Simulate::Clock::now() - syncCPU &&
+            while (Seconds((d->time - syncSim) * slowdown) < mj::Simulate::Clock::now() - syncCPU &&
                    mj::Simulate::Clock::now() - startCPU < Seconds(refreshTime)) {
               // measure slowdown before first step
               if (!measured && elapsedSim) {
@@ -411,7 +405,7 @@ void PhysicsThread(mj::Simulate* sim, const char* filename) {
 
       // allocate ctrlnoise
       free(ctrlnoise);
-      ctrlnoise = static_cast<mjtNum*>(malloc(sizeof(mjtNum)*m->nu));
+      ctrlnoise = static_cast<mjtNum*>(malloc(sizeof(mjtNum) * m->nu));
       mju_zero(ctrlnoise, m->nu);
     }
   }
@@ -447,7 +441,7 @@ int main(int argc, const char** argv) {
 
   // print version, check compatibility
   std::printf("MuJoCo version %s\n", mj_versionString());
-  if (mjVERSION_HEADER!=mj_version()) {
+  if (mjVERSION_HEADER != mj_version()) {
     mju_error("Headers and library have different versions");
   }
 
@@ -469,11 +463,10 @@ int main(int argc, const char** argv) {
   // simulate object encapsulates the UI
   auto sim = std::make_unique<mj::Simulate>(
       std::make_unique<mj::GlfwAdapter>(),
-      &scn, &cam, &opt, &pert, /* fully_managed = */ true
-  );
+      &scn, &cam, &opt, &pert, /* fully_managed = */ true);
 
   const char* filename = nullptr;
-  if (argc >  1) {
+  if (argc > 1) {
     filename = argv[1];
   }
 

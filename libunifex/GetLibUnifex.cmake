@@ -4,9 +4,8 @@ message(STATUS "get libunifex ...")
 
 FetchContent_Declare(
   libunifex
-  URL  https://github.com/facebookexperimental/libunifex/archive/c359fd8e7d97d91359cf4a6c1dbef99b0b1767b6.tar.gz
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
+  URL https://github.com/facebookexperimental/libunifex/archive/v0.3.0.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 
 FetchContent_GetProperties(libunifex)
 if(NOT libunifex_POPULATED)

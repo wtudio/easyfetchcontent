@@ -1,8 +1,10 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.26)
 
-project(EasyFetchContentTestAll VERSION 0.1.0 LANGUAGES C CXX)
+project(EasyFetchContentTestAll)
 
 message(STATUS "uncomment to enable test for target library")
+
+# NOTE: Do not test all at once. There may be conflicts between some libraries
 
 # add_subdirectory(asio)
 # add_subdirectory(boost)

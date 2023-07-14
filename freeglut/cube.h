@@ -4,7 +4,6 @@
 
 #define MAXSIZE 10000000
 
-//一个立方矩阵
 class cube {
  public:
   double*** val;
@@ -37,7 +36,6 @@ class cube {
   }
   cube& operator=(cube&& CB) {
     if (this != &CB) {
-      //先释放自己的资源
       _releaseMemory();
       val = CB.val;
       x = CB.x;

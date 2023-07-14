@@ -4,9 +4,8 @@ message(STATUS "get lua ...")
 
 FetchContent_Declare(
   lua
-  URL  https://github.com/lua/lua/archive/v5.4.3.tar.gz
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
+  URL https://github.com/lua/lua/archive/v5.4.3.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 
 FetchContent_GetProperties(lua)
 if(NOT lua_POPULATED)
@@ -16,8 +15,8 @@ if(NOT lua_POPULATED)
   add_executable(lua)
   add_executable(lua::lua ALIAS lua)
 
-  File(GLOB lua_src ${lua_SOURCE_DIR}/*.c)
-  LIST(REMOVE_ITEM lua_src ${lua_SOURCE_DIR}/onelua.c)
+  file(GLOB lua_src ${lua_SOURCE_DIR}/*.c)
+  list(REMOVE_ITEM lua_src ${lua_SOURCE_DIR}/onelua.c)
 
   target_sources(lua PRIVATE ${lua_src})
   target_include_directories(lua PRIVATE ${lua_SOURCE_DIR})
@@ -29,8 +28,8 @@ if(NOT lua_POPULATED)
   add_library(liblua)
   add_library(lua::liblua ALIAS liblua)
 
-  File(GLOB lib_lua_src ${lua_SOURCE_DIR}/*.c)
-  LIST(REMOVE_ITEM lib_lua_src ${lua_SOURCE_DIR}/lua.c ${lua_SOURCE_DIR}/onelua.c)
+  file(GLOB lib_lua_src ${lua_SOURCE_DIR}/*.c)
+  list(REMOVE_ITEM lib_lua_src ${lua_SOURCE_DIR}/lua.c ${lua_SOURCE_DIR}/onelua.c)
 
   target_sources(liblua PRIVATE ${lib_lua_src})
   target_include_directories(liblua PUBLIC ${lua_SOURCE_DIR})

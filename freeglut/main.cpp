@@ -50,14 +50,14 @@ std::vector<float> val2rgba(float h) {
   return std::vector<float>{r, g, b, 1.0f};
 }
 
-cube CB;                       //待画立方体
-double thr;                    //阈值，小于等于其的不画
-float maxVal, minVal, colorD;  //颜色变换
-float cubeD, deX, deY, deZ;    //位置变换
+cube CB;                       // 待画立方体
+double thr;                    // 阈值，小于等于其的不画
+float maxVal, minVal, colorD;  // 颜色变换
+float cubeD, deX, deY, deZ;    // 位置变换
 
-//核心函数，cube绘图。使用opengl。坐标系-10000~10000
+// 核心函数，cube绘图。使用opengl。坐标系-10000~10000
 void cubeDisplay() {
-  //画立方体，六个方向进行遍历
+  // 画立方体，六个方向进行遍历
   float curX, curY, curZ, curX_, curY_, curZ_;
 
   for (int32_t xx = 0; xx < CB.x; ++xx) {
@@ -155,8 +155,8 @@ void cubeDisplay() {
 }
 static void myKeyboard(unsigned char key, int x, int y) {
   switch (key) {
-    case 27:  //按ESCAPE时退出窗口
-              //exit(0);
+    case 27:  // 按ESCAPE时退出窗口
+              // exit(0);
       glutLeaveMainLoop();
       break;
     case 'z':
@@ -181,21 +181,21 @@ int32_t main(int32_t argc, char** argv) {
     }
   }
 
-  //位置变换
+  // 位置变换
   cubeD = 1.8 * BASELEN / max(max(CB.x, CB.y), CB.z);
   deX = CB.x / 2.0f, deY = CB.y / 2.0f, deZ = CB.z / 2.0f;
 
-  //颜色变换
+  // 颜色变换
   pair<double*, double*> minmaxVal = minmax_element(CB.val[0][0], CB.val[0][0] + CB.x * CB.y * CB.z);
   maxVal = *(minmaxVal.second) + 1.0;
   minVal = *(minmaxVal.first) - 1.0;
   colorD = 360.0f / (maxVal - minVal);
 
-  //设置打印帧率
+  // 设置打印帧率
   glSys* p = glSys::getInstance();
   p->blPrintFPS = true;
 
-  //初试阈值
+  // 初试阈值
   thr = minVal;
 
   glSysSetDisplay(cubeDisplay);

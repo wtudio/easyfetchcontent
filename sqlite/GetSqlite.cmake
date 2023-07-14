@@ -2,12 +2,11 @@ include(FetchContent)
 
 message(STATUS "get sqlite ...")
 
-# sqlite版本记录:https://www.sqlite.org/chronology.html
+# sqlite version info : https://www.sqlite.org/chronology.html
 FetchContent_Declare(
   sqlite
-  URL  https://sqlite.org/2021/sqlite-amalgamation-3370000.zip
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
+  URL https://sqlite.org/2021/sqlite-amalgamation-3370000.zip
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 
 FetchContent_GetProperties(sqlite)
 if(NOT sqlite_POPULATED)

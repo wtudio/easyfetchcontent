@@ -1,5 +1,6 @@
 #include "mybenchlib.hpp"
 
+#include <cstring>
 #include <vector>
 
 void BubbleSort(int* arr, size_t len) {

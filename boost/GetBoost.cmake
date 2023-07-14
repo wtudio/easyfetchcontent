@@ -5,8 +5,7 @@ message(STATUS "get boost ...")
 FetchContent_Declare(
   Boost
   URL https://github.com/boostorg/boost/releases/download/boost-1.81.0/boost-1.81.0.tar.xz
-  DOWNLOAD_EXTRACT_TIMESTAMP ON
-)
+  DOWNLOAD_EXTRACT_TIMESTAMP ON)
 
 FetchContent_GetProperties(Boost)
 if(NOT Boost_POPULATED)
