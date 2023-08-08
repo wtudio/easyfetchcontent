@@ -19,6 +19,7 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 - [hiredis](hiredis)
 - [inja](inja)
 - [jsoncpp](jsoncpp)
+- [lcm](lcm)
 - [leveldb](leveldb)
 - [libevent](libevent)
 - [libtomcrypt](libtomcrypt)
