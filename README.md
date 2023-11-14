@@ -37,6 +37,7 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 - [snappy](snappy)
 - [spdlog](spdlog)
 - [sqlite](sqlite)
+- [stdexec](stdexec)
 - [taskflow](taskflow)
 - [tinyxml2](tinyxml2)
 - [yamlcpp](yamlcpp)
