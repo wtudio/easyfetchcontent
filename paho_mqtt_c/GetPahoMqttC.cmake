@@ -4,13 +4,25 @@ message(STATUS "get paho_mqtt_c ...")
 
 FetchContent_Declare(
   paho_mqtt_c
-  URL https://github.com/eclipse/paho.mqtt.c/archive/v1.3.12.tar.gz
+  URL https://github.com/eclipse/paho.mqtt.c/archive/v1.3.13.tar.gz
   DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 
 FetchContent_GetProperties(paho_mqtt_c)
 if(NOT paho_mqtt_c_POPULATED)
   set(PAHO_ENABLE_TESTING
       OFF
+      CACHE BOOL "")
+
+  set(PAHO_WITH_SSL
+      ON
+      CACHE BOOL "")
+
+  set(PAHO_BUILD_SHARED
+      OFF
+      CACHE BOOL "")
+
+  set(PAHO_BUILD_STATIC
+      ON
       CACHE BOOL "")
 
   FetchContent_MakeAvailable(paho_mqtt_c)

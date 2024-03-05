@@ -15,20 +15,33 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 include(GetPahoMqttC)
 
 # define src files
-file(GLOB srcs ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+file(GLOB server_srcs ${CMAKE_CURRENT_SOURCE_DIR}/server/*.cpp)
+file(GLOB client_srcs ${CMAKE_CURRENT_SOURCE_DIR}/client/*.cpp)
 
 # add target
-add_executable(${PRJ_NAME})
+add_executable(${PRJ_NAME}_server)
+add_executable(${PRJ_NAME}_client)
 
 # set src files
-target_sources(${PRJ_NAME} PRIVATE ${srcs})
+target_sources(${PRJ_NAME}_server PRIVATE ${server_srcs})
+target_sources(${PRJ_NAME}_client PRIVATE ${client_srcs})
 
 # set head include path
 target_include_directories(
-  ${PRJ_NAME}
+  ${PRJ_NAME}_server
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_include_directories(
+  ${PRJ_NAME}_client
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # set link target
 target_link_libraries(
-  ${PRJ_NAME}
-  PRIVATE paho_mqtt_c::paho-mqtt3c)
+  ${PRJ_NAME}_server
+  PRIVATE paho_mqtt_c::paho-mqtt3as-static
+          paho_mqtt_c::paho-mqtt3cs-static)
+
+target_link_libraries(
+  ${PRJ_NAME}_client
+  PRIVATE paho_mqtt_c::paho-mqtt3as-static
+          paho_mqtt_c::paho-mqtt3cs-static)
