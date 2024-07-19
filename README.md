@@ -28,6 +28,7 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 - [lua](lua)
 - [mujoco](mujoco)
 - [nlohmann_json](nlohmann_json)
+- [opentelemetry_cpp](opentelemetry_cpp)
 - [paho_mqtt_c](paho_mqtt_c)
 - [paho_mqtt_cpp](paho_mqtt_cpp)
 - [protobuf](protobuf)
