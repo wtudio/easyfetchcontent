@@ -44,6 +44,7 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 - [taskflow](taskflow)
 - [tinyxml2](tinyxml2)
 - [yamlcpp](yamlcpp)
+- [zeromq](zeromq)
 - [zlib](zlib)
 
 ## License
