@@ -10,6 +10,7 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 - [boost](boost)
 - [cjson](cjson)
 - [eigen3](eigen3)
+- [entt](entt)
 - [fmt](fmt)
 - [freeglut](freeglut)
 - [gflags](gflags)
