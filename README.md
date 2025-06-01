@@ -36,6 +36,7 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 - [pybind11](pybind11)
 - [range-v3](range-v3)
 - [rapidjson](rapidjson)
+- [raylib](raylib)
 - [robinhood](robinhood)
 - [snappy](snappy)
 - [spdlog](spdlog)
