@@ -13,7 +13,7 @@ void inadd() {
   std::cout << a + b;
 }
 
-void call_function(const std::function<std::string(int)> &func) {
+void call_function(const std::function<std::string(int)>& func) {
   std::string result = func(10);
   std::cout << result << std::endl;
 }
@@ -27,8 +27,8 @@ class TestClass {
     std::cout << "destroy" << std::endl;
   }
 
-  void setName(const std::string &name) { name_ = name; }
-  const std::string &getName() const { return name_; }
+  void setName(const std::string& name) { name_ = name; }
+  const std::string& getName() const { return name_; }
 
  private:
   int a_;

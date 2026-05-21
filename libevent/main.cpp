@@ -8,11 +8,11 @@
 
 int idx;
 
-static void timeout_cb(evutil_socket_t fd, short event, void *arg) {
+static void timeout_cb(evutil_socket_t fd, short event, void* arg) {
   printf("run timeout_cb, idx:%d\n", idx);
 
   if (--idx) {
-    struct event *timeout = (struct event *)arg;
+    struct event* timeout = (struct event*)arg;
     struct timeval tv;
     tv.tv_sec = 2;
     tv.tv_usec = 0;
@@ -20,16 +20,16 @@ static void timeout_cb(evutil_socket_t fd, short event, void *arg) {
   }
 }
 
-int32_t main(int32_t argc, char **argv) {
+int32_t main(int32_t argc, char** argv) {
   int flags = 0;
   idx = 5;
 
   /* Initalize the event library */
-  struct event_base *base = event_base_new();
+  struct event_base* base = event_base_new();
 
   /* Initalize one event */
   struct event timeout;
-  event_assign(&timeout, base, -1, flags, timeout_cb, (void *)&timeout);
+  event_assign(&timeout, base, -1, flags, timeout_cb, (void*)&timeout);
 
   struct timeval tv;
   tv.tv_sec = 2;

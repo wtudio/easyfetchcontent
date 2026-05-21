@@ -1,7 +1,7 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   // create an empty structure (null)
   nlohmann::json j;
 

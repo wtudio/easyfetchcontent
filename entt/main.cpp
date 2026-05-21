@@ -25,13 +25,13 @@ struct Renderable {
 struct PlayerTag {};
 struct EnemyTag {};
 
-void InputSystem(entt::registry &registry) {
+void InputSystem(entt::registry& registry) {
   char input;
   std::cout << "move (W/A/S/D): ";
   std::cin >> input;
 
   auto view = registry.view<Velocity, const PlayerTag>();
-  view.each([&](Velocity &vel) {
+  view.each([&](Velocity& vel) {
     vel.dx = 0;
     vel.dy = 0;
 
@@ -52,15 +52,15 @@ void InputSystem(entt::registry &registry) {
   });
 }
 
-void AIMoveSystem(entt::registry &registry) {
+void AIMoveSystem(entt::registry& registry) {
   // Simple AI: move towards the player
   auto player = registry.view<const Position, const PlayerTag>().front();
-  const Position &playerPos = registry.get<const Position>(player);
+  const Position& playerPos = registry.get<const Position>(player);
 
   auto enemies = registry.view<const Position, Velocity, const EnemyTag>();
   for (auto entity : enemies) {
-    const Position &pos = enemies.get<const Position>(entity);
-    Velocity &vel = enemies.get<Velocity>(entity);
+    const Position& pos = enemies.get<const Position>(entity);
+    Velocity& vel = enemies.get<Velocity>(entity);
 
     if (pos.x < playerPos.x)
       vel.dx = 1;
@@ -78,22 +78,22 @@ void AIMoveSystem(entt::registry &registry) {
   }
 }
 
-void MovementSystem(entt::registry &registry) {
-  registry.view<Position, const Velocity>().each([](Position &pos, const Velocity &vel) {
+void MovementSystem(entt::registry& registry) {
+  registry.view<Position, const Velocity>().each([](Position& pos, const Velocity& vel) {
     pos.x += vel.dx;
     pos.y += vel.dy;
   });
 }
 
-void CollisionSystem(entt::registry &registry) {
+void CollisionSystem(entt::registry& registry) {
   auto players = registry.view<const Position, Health, const PlayerTag>();
   auto enemies = registry.view<const Position, const EnemyTag>();
 
   for (auto entity : players) {
-    const Position &pos = players.get<const Position>(entity);
-    Health &hp = players.get<Health>(entity);
+    const Position& pos = players.get<const Position>(entity);
+    Health& hp = players.get<Health>(entity);
 
-    enemies.each([&](const Position &epos) {
+    enemies.each([&](const Position& epos) {
       int dx = pos.x - epos.x;
       int dy = pos.y - epos.y;
       int distance = dx * dx + dy * dy;
@@ -106,14 +106,14 @@ void CollisionSystem(entt::registry &registry) {
   }
 }
 
-void RenderSystem(entt::registry &registry) {
+void RenderSystem(entt::registry& registry) {
   char canvas[20][20] = {0};
 
   for (int y = 0; y < 20; ++y)
     for (int x = 0; x < 20; ++x)
       canvas[y][x] = '.';
 
-  registry.view<Position, Renderable>().each([&](const Position &pos, Renderable &ren) {
+  registry.view<Position, Renderable>().each([&](const Position& pos, Renderable& ren) {
     int x = pos.x;
     int y = pos.y;
     if (x >= 0 && x < 20 && y >= 0 && y < 20)
@@ -127,7 +127,7 @@ void RenderSystem(entt::registry &registry) {
   }
 }
 
-int32_t main(int32_t argc, char **argv) {
+int32_t main(int32_t argc, char** argv) {
   entt::registry registry;
 
   auto player = registry.create();

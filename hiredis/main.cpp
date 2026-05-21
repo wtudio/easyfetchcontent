@@ -4,9 +4,9 @@
 
 using namespace std;
 
-int32_t main(int32_t argc, char **argv) {
-  redisContext *c = nullptr;
-  redisReply *reply = nullptr;
+int32_t main(int32_t argc, char** argv) {
+  redisContext* c = nullptr;
+  redisReply* reply = nullptr;
 
   // connect
   c = redisConnect("127.0.0.1", 6379);
@@ -21,7 +21,7 @@ int32_t main(int32_t argc, char **argv) {
   }
 
   // ping
-  reply = static_cast<redisReply *>(redisCommand(c, "PING"));
+  reply = static_cast<redisReply*>(redisCommand(c, "PING"));
   if (reply == nullptr) {
     printf("PING failed, no rsp\n");
   } else {
@@ -30,7 +30,7 @@ int32_t main(int32_t argc, char **argv) {
   }
 
   // set
-  reply = static_cast<redisReply *>(redisCommand(c, "SET %s %s", "foo", "hello world"));
+  reply = static_cast<redisReply*>(redisCommand(c, "SET %s %s", "foo", "hello world"));
   if (reply == nullptr) {
     printf("SET failed, no rsp\n");
   } else {
@@ -39,7 +39,7 @@ int32_t main(int32_t argc, char **argv) {
   }
 
   // get
-  reply = static_cast<redisReply *>(redisCommand(c, "GET foo"));
+  reply = static_cast<redisReply*>(redisCommand(c, "GET foo"));
   if (reply == nullptr) {
     printf("GET failed, no rsp\n");
   } else {

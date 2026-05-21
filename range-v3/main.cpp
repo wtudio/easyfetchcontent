@@ -2,7 +2,7 @@
 #include <range/v3/all.hpp>
 #include <string>
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   std::string s{"hello"};
 
   // output: h e l l o

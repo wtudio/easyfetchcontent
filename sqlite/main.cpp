@@ -5,8 +5,8 @@
 
 using namespace std;
 
-static int callback(void *data, int argc, char **argv, char **azColName) {
-  printf("data : %s\n", static_cast<char *>(data));
+static int callback(void* data, int argc, char** argv, char** azColName) {
+  printf("data : %s\n", static_cast<char*>(data));
 
   for (int ii = 0; ii < argc; ++ii) {
     printf("%s = %s\n", azColName[ii], argv[ii] ? argv[ii] : "NULL");
@@ -14,13 +14,13 @@ static int callback(void *data, int argc, char **argv, char **azColName) {
   return 0;
 }
 
-int32_t main(int32_t argc, char **argv) {
-  sqlite3 *db;
+int32_t main(int32_t argc, char** argv) {
+  sqlite3* db;
   int ret;
-  char *err_msg;
-  const char *data = "Callback function called";
+  char* err_msg;
+  const char* data = "Callback function called";
 
-  const std::filesystem::path &db_file = std::filesystem::absolute("./test.db");
+  const std::filesystem::path& db_file = std::filesystem::absolute("./test.db");
   printf("db file path is %s\n", db_file.string().c_str());
   if (std::filesystem::status(db_file).type() == std::filesystem::file_type::regular) {
     std::filesystem::remove(db_file);
@@ -47,7 +47,7 @@ ADDRESS        CHAR(50),
 SALARY         REAL);
 )str";
 
-  ret = sqlite3_exec(db, sql.c_str(), callback, (void *)data, &err_msg);
+  ret = sqlite3_exec(db, sql.c_str(), callback, (void*)data, &err_msg);
   if (ret != SQLITE_OK) {
     printf("sqlite3_exec error: %s\n", err_msg);
     sqlite3_free(err_msg);
@@ -67,7 +67,7 @@ VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );
 INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
 VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );
 )str";
-  ret = sqlite3_exec(db, sql.c_str(), callback, (void *)data, &err_msg);
+  ret = sqlite3_exec(db, sql.c_str(), callback, (void*)data, &err_msg);
   if (ret != SQLITE_OK) {
     printf("sqlite3_exec error: %s\n", err_msg);
     sqlite3_free(err_msg);
@@ -78,7 +78,7 @@ VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );
   // select
   printf("-------------------select-------------------\n");
   sql = "SELECT * from COMPANY";
-  ret = sqlite3_exec(db, sql.c_str(), callback, (void *)data, &err_msg);
+  ret = sqlite3_exec(db, sql.c_str(), callback, (void*)data, &err_msg);
   if (ret != SQLITE_OK) {
     printf("sqlite3_exec error: %s\n", err_msg);
     sqlite3_free(err_msg);
@@ -89,7 +89,7 @@ VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );
   // update
   printf("-------------------update-------------------\n");
   sql = "UPDATE COMPANY set SALARY = 25000.00 where ID=1;SELECT * from COMPANY";
-  ret = sqlite3_exec(db, sql.c_str(), callback, (void *)data, &err_msg);
+  ret = sqlite3_exec(db, sql.c_str(), callback, (void*)data, &err_msg);
   if (ret != SQLITE_OK) {
     printf("sqlite3_exec error: %s\n", err_msg);
     sqlite3_free(err_msg);
@@ -100,7 +100,7 @@ VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );
   // delete
   printf("-------------------delete-------------------\n");
   sql = "DELETE from COMPANY where ID=2;SELECT * from COMPANY";
-  ret = sqlite3_exec(db, sql.c_str(), callback, (void *)data, &err_msg);
+  ret = sqlite3_exec(db, sql.c_str(), callback, (void*)data, &err_msg);
   if (ret != SQLITE_OK) {
     printf("sqlite3_exec error: %s\n", err_msg);
     sqlite3_free(err_msg);
