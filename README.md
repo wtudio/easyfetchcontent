@@ -18,6 +18,7 @@ Copy the **xxlib/GetXXlib.cmake** files to your `CMAKE_MODULE_PATH` and include 
 - [grpc](grpc)
 - [gtest](gtest)
 - [hiredis](hiredis)
+- [imgui](imgui)
 - [inja](inja)
 - [jsoncpp](jsoncpp)
 - [lcm](lcm)
